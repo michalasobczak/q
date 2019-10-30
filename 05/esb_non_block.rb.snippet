@@ -1,0 +1,8 @@
+# ...
+while true
+  delivery_info, properties, payload = @queue.pop
+  if !payload.blank? then
+    # ...
+  end
+  sleep 0.1
+end

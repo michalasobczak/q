@@ -1,0 +1,28 @@
+# 1
+gem "sentry-raven"
+
+# 2
+unless Rails.env.development?
+    Raven.configure do |config|
+        config.dsn = "https://token@sentry.local/14"
+    end
+end
+
+# 3
+<module xmlns="urn:jboss:module:1.0" name="io.sentry">
+    <dependencies>
+        <module name="org.slf4j"/>
+    </dependencies>
+    <resources>
+        <resource-root path="sentry-1.7.2.jar"/>
+        <resource-root path="jackson-core-2.8.7.jar"/>
+        <resource-root path="jboss-jsse-api_8.0_spec-1.0.0.Final.jar"/>
+    </resources>
+</module>
+
+# 4
+ADD io/sentry/main/module.xml /opt/jboss/wildfly/modules/io/sentry/main
+
+# 5 
+JAVA_OPTS="$JAVA_OPTS -Dsentry.dsn=https://https://token@sentry.local.pl/24?environment=SENTRYENV"
+

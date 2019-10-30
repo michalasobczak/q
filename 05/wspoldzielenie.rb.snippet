@@ -1,0 +1,43 @@
+# 1
+source 'https://user:pass@gems.local'
+gem 'sharedplus', require: true
+
+# 2
+Gem::Specification.new do |s|
+  s.name        = 'sharedplus'
+  s.version     = '0.1.2'
+  s.date        = '2012-12-31'
+  s.summary     = "Shared+"
+  s.description = "Współdzielone elementy aplikacji"
+  s.authors     = ["Michał Sobczak"]
+  s.email       = 'michalasobczak@gmail.com'
+  s.files       = ["lib/sharedplus.rb"]
+  s.homepage    = 'sharedplus.local'
+  s.license     = 'Nonstandard'
+end
+
+# 3
+require 'active_support'
+require 'active_support/concern'
+require 'active_model'
+module Sharedplus
+  module Models
+      module DeviceConcern
+          module CoreAssociations
+              extend ActiveSupport::Concern
+              included do
+                has_many :requests
+              end # included
+          end # CoreAssociations
+      end # DeviceConcern
+  end # Models 
+end # Sharedplus
+
+# 4
+# gem build sharedplus.gemspec
+
+# 5
+class Device < ApplicationRecord
+  include Sharedplus::Models::DeviceConcern::CoreAssociations
+end
+

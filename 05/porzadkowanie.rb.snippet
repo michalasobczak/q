@@ -1,0 +1,10 @@
+# 1
+class Runtime::Base < ActiveRecord::Base
+  self.abstract_class = true
+  establish_connection "#{Rails.env}_runtime".to_sym
+end # Runtime::Base
+
+# 2
+class Runtime::Entry < Runtime::Base
+  self.table_name = 'entries'
+end # Runtime::Entry

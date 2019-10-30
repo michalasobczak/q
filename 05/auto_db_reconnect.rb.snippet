@@ -1,0 +1,22 @@
+def task
+  while true
+    begin
+      db_connection_test = ActiveRecord::Base.connection.execute("SELECT 1")
+    rescue PG::ConnectionBad, ActiveRecord::StatementInvalid
+      begin
+        puts "trying to reconnect..."
+        ActiveRecord::Base.connection.reconnect!
+      rescue
+        puts "...still no connection"
+        sleep 1
+        retry     # will retry the reconnect
+      else
+        puts "finally got connection!"
+        retry     # will retry the database_access_here call
+      end
+    rescue Exception => e
+      logger.error("[e] Exception occured -> #{e.class}")
+    end # begin/rescue
+    sleep 0.1
+  end # while
+end # task

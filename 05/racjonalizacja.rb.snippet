@@ -1,0 +1,12 @@
+# 1
+all = Item.all
+count = all.size.to_s
+
+# 2
+all = Item.where("is_processed IS NULL")
+
+# 3
+map = Device.all.index_by(&:version)
+
+# 4
+map = Device.all.select("company, version")

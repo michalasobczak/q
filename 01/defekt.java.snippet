@@ -1,0 +1,6 @@
+HashSet currentMessages = new HashSet();
+while (moreMessages()){
+  Message message = getNextMessage();
+  currentMessages.add(message.getID(), message);
+  //do work with message
+}

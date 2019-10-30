@@ -1,0 +1,33 @@
+class Correction < ApplicationRecord
+  include AASM
+  aasm column: 'status' do 
+    state :ROB, :initial => true
+    state :PDA
+    state :ZAA
+    state :ANU
+    state :AKT
+    state :ZAK
+    state :USU
+    event :przekaz_do_akceptacji do
+      transitions :from => :ROB, :to => :PDA
+    end
+    event :zwroc do
+      transitions :from => :PDA, :to => :ROB
+    end
+    event :zaakceptuj do
+      transitions :from => :PDA, :to => :ZAA
+    end
+    event :aktywuj do
+      transitions :from => :ZAA, :to => :AKT
+    end
+    event :anuluj do
+      transitions :from => :AKT, :to => :ANU
+    end
+    event :zakoncz do
+      transitions :from => :AKT, :to => :ZAK
+    end
+    event :usun do
+      transitions :from => :ROB, :to => :USU
+    end
+  end # aasm
+end

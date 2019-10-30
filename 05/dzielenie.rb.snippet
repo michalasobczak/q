@@ -1,0 +1,11 @@
+# map = Device.all.index_by(&:version)
+
+def execute_sql_in_ranges(sql)
+  conn = Device.connection
+  sqls = sql.split('; ')
+  sqls.each_slice(100).each_with_index do |slice,index|
+    slice_sql = slice.join('; ')
+    puts " executing slice no #{index.to_s}"
+    conn.execute(slice_sql)
+  end
+end
