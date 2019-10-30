@@ -1,3 +1,10 @@
+class StringChanger
+  def reverse_and_save(string_to_reverse)
+    #'gnirts elpmaxe'
+    string_to_reverse.reverse
+  end
+end
+
 describe StringChanger do
   it 'reverses strings' do
     string_changer = StringChanger.new
@@ -6,5 +13,7 @@ describe StringChanger do
   end
 end
 
-# rspec string_changer_spec.rb --format documentation
-
+# rspec tdd.rb --format documentation
+# instalacja Ruby poprzez rvm oraz:
+# sudo apt install ruby-rspec-core
+# gem install rspec
