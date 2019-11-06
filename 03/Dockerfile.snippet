@@ -1,0 +1,10 @@
+...
+RUN gem install fluentd 
+RUN fluentd --setup /opt/fluent
+RUN fluent-gem install fluent-plugin-elasticsearch
+RUN echo "fluentd -c /opt/fluent/fluent.conf &"  >> /opt/runner.sh
+...
+RUN chmod a+x /opt/runner.sh
+COPY fluent.conf /opt/fluent/fluent.conf
+...
+ENTRYPOINT /opt/runner.sh
